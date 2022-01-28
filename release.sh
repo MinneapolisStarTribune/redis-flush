@@ -12,4 +12,4 @@ GOOS=darwin GOARCH=amd64 go build -o redis-flush.darwin.amd64
 GOOS=darwin GOARCH=arm64 go build -o redis-flush.darwin.arm64
 GOOS=windows GOARCH=amd64 go build -o redis-flush.windows.amd64.exe
 
-gh release create -p "${TAG}" redis-flush.*
+gh release create -p --generate-notes "${TAG}" redis-flush.*
