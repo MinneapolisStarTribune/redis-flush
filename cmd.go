@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"os"
 
 	"github.com/go-redis/redis/v8"
 )
@@ -17,6 +18,11 @@ func main() {
 	paramPassword := flag.String("password", "", "Password for authentication, if enabled")
 	paramDB := flag.Int("db", 0, "Index of database to flush (use -all to flush all)")
 	flag.Parse()
+
+	if *paramFlushAll && *paramDB != 0 {
+		fmt.Fprintf(os.Stderr, "Use -all to target all databases, or -db to specify a specific database other than 0.")
+		return
+	}
 
 	var res *redis.StatusCmd
 	c := redis.NewClient(&redis.Options{
